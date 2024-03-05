@@ -127,7 +127,7 @@ const TransformationForm = ({
             router.push(`/transformations/${newImage._id}`);
           }
         } catch (error: any) {
-          console.log(error);
+          // console.log(error);
           toast({
             title: "Error ⚠️❗",
             description: `${error.message}`,
@@ -152,7 +152,7 @@ const TransformationForm = ({
             router.push(`/transformations/${updatedImage._id}`);
           }
         } catch (error: any) {
-          console.log(error);
+          // console.log(error);
           toast({
             title: "Error ⚠️❗",
             description: `${error.message}`,
