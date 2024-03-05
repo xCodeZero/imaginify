@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { object, z } from "zod";
+import { z } from "zod";
 
 import {
   Select,
@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -22,7 +23,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "../ui/button";
 import {
   aspectRatioOptions,
   creditFee,
@@ -30,18 +30,15 @@ import {
   transformationTypes,
 } from "@/constants";
 import { CustomField } from "./CustomField";
-import { type } from "os";
 import { useEffect, useState, useTransition } from "react";
 import { AspectRatioKey, debounce, deepMergeObjects } from "@/lib/utils";
-import config from "next/config";
-import { updateCredits } from "@/lib/actions/user.actions";
 import MediaUploader from "./MediaUploader";
 import TransformedImage from "./TransformedImage";
-import { addImage, updateImage } from "@/lib/actions/image.actions";
+import { updateCredits } from "@/lib/actions/user.actions";
 import { getCldImageUrl } from "next-cloudinary";
+import { addImage, updateImage } from "@/lib/actions/image.actions";
 import { useRouter } from "next/navigation";
 import { InsufficientCreditsModal } from "./InsufficientCreditsModal";
-import { useToast } from "../ui/use-toast";
 
 export const formSchema = z.object({
   title: z.string(),
@@ -68,10 +65,9 @@ const TransformationForm = ({
   const [transformationConfig, setTransformationConfig] = useState(config);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
-  const { toast } = useToast();
 
   const initialValues =
-    data && action == "Update"
+    data && action === "Update"
       ? {
           title: data?.title,
           aspectRatio: data?.aspectRatio,
@@ -126,14 +122,8 @@ const TransformationForm = ({
             setImage(data);
             router.push(`/transformations/${newImage._id}`);
           }
-        } catch (error: any) {
-          // console.log(error);
-          toast({
-            title: "Error ⚠️❗",
-            description: `${error.message}`,
-            duration: 5000,
-            className: "error-toast",
-          });
+        } catch (error) {
+          console.log(error);
         }
       }
 
@@ -151,14 +141,8 @@ const TransformationForm = ({
           if (updatedImage) {
             router.push(`/transformations/${updatedImage._id}`);
           }
-        } catch (error: any) {
-          // console.log(error);
-          toast({
-            title: "Error ⚠️❗",
-            description: `${error.message}`,
-            duration: 5000,
-            className: "error-toast",
-          });
+        } catch (error) {
+          console.log(error);
         }
       }
     }
@@ -199,6 +183,7 @@ const TransformationForm = ({
         },
       }));
     }, 1000)();
+
     return onChangeField(value);
   };
 
@@ -233,6 +218,7 @@ const TransformationForm = ({
           className="w-full"
           render={({ field }) => <Input {...field} className="input-field" />}
         />
+
         {type === "fill" && (
           <CustomField
             control={form.control}
@@ -260,6 +246,7 @@ const TransformationForm = ({
             )}
           />
         )}
+
         {(type === "remove" || type === "recolor") && (
           <div className="prompt-field">
             <CustomField
@@ -350,7 +337,7 @@ const TransformationForm = ({
             className="submit-button capitalize"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Submitting" : "Save image"}
+            {isSubmitting ? "Submitting..." : "Save Image"}
           </Button>
         </div>
       </form>

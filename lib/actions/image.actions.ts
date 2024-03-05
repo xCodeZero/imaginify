@@ -36,12 +36,7 @@ export async function addImage({ image, userId, path }: AddImageParams) {
 
     return JSON.parse(JSON.stringify(newImage));
   } catch (error) {
-    return {
-      error,
-      success: false,
-      message: `${error}`,
-      status: 500,
-    };
+    handleError(error);
   }
 }
 
@@ -118,7 +113,7 @@ export async function getAllImages({
       secure: true,
     });
 
-    let expression = "folder=snaptify";
+    let expression = "folder=imaginify";
 
     if (searchQuery) {
       expression += ` AND ${searchQuery}`;
