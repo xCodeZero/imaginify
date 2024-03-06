@@ -182,12 +182,24 @@ export const aspectRatioOptions = {
   },
 };
 
+export const privacyOptions = {
+  Private: {
+    privacy: 2,
+    label: "Private Image",
+  },
+  Public: {
+    privacy: 1,
+    label: "Public Image",
+  },
+};
+
 export const defaultValues = {
   title: "",
   aspectRatio: "",
   color: "",
   prompt: "",
   publicId: "",
+  privacy: 1,
 };
 
 export const creditFee = -1;
