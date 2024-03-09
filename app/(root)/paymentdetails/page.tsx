@@ -1,9 +1,10 @@
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import { getUserById } from "@/lib/actions/user.actions";
-import { getUserPayments } from "@/lib/actions/payments.action";
+
 import { PaymentCollection } from "@/components/shared/PaymentCollection";
 import Header from "@/components/shared/Header";
+import { getUserById } from "@/lib/actions/user.actions";
+import { getUserPayments } from "@/lib/actions/payments.action";
 
 const PaymentDetails = async ({ searchParams }: SearchParamProps) => {
   const page = Number(searchParams?.page) || 1;

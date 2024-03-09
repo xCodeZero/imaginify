@@ -3,9 +3,6 @@
 import { useToast } from "@/components/ui/use-toast";
 import { UploadButton } from "@/lib/utils";
 
-import Image from "next/image";
-import { useState } from "react";
-
 type PaymentImageUploaderProps = {
   onValueChange: (value: string) => void;
   setImage: React.Dispatch<any>;

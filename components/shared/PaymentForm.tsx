@@ -20,7 +20,6 @@ import { CustomPaymentField } from "./CustomPaymentField";
 import { useState } from "react";
 import PaymentImageUploader from "./PaymentImageUploader";
 import { createPayment } from "@/lib/actions/payments.action";
-import router from "next/router";
 import { plans } from "@/constants";
 import {
   Select,
