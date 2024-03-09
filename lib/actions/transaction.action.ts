@@ -56,7 +56,7 @@ export async function createTransaction(transaction: CreateTransactionParams) {
       author: transaction.buyerId,
       status: 0,
       plan: transaction.plan,
-      image: "",
+      image: "asdfasdfasdfasdfasdfasdfasdsdaf",
       amount: transaction.amount,
       credits: transaction.credits,
     });

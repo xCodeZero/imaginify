@@ -18,7 +18,7 @@ const PaymentDetails = async ({ searchParams }: SearchParamProps) => {
 
   return (
     <>
-      <Header title="Payments" />
+      <Header title="Payment Records" />
 
       <section className="mt-8 md:mt-14">
         <PaymentCollection

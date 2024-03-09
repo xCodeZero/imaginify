@@ -59,10 +59,7 @@ export const PaymentCollection = ({
 
   return (
     <>
-      <div className="collection-heading">
-        <h2 className="h2-bold text-dark-600">Payment Records</h2>
-        {hasSearch && <Search />}
-      </div>
+      <div className="collection-heading">{hasSearch && <Search />}</div>
 
       {payments.length > 0 ? (
         <Table className="mt-10">
