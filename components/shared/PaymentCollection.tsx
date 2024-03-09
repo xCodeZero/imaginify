@@ -21,7 +21,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { transformationTypes } from "@/constants";
+import { paymentTypes, transformationTypes } from "@/constants";
 import { IImage } from "@/lib/database/models/image.model";
 import { formUrlQuery, getTimestamp, truncate } from "@/lib/utils";
 
@@ -69,8 +69,9 @@ export const PaymentCollection = ({
               <TableHead className="w-[100px]">Reference Number</TableHead>
               <TableHead>Plan</TableHead>
               <TableHead>Credits</TableHead>
-              <TableHead className="text-right">Amount</TableHead>
+              <TableHead>Amount</TableHead>
               <TableHead>Document</TableHead>
+              <TableHead>Type</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Date</TableHead>
             </TableRow>
@@ -90,6 +91,13 @@ export const PaymentCollection = ({
                       width={32}
                       height={32}
                     />
+                  </TableCell>
+                  <TableCell>
+                    {payment.paymentType === "gcash"
+                      ? "GCash"
+                      : payment.paymentType === "bank"
+                      ? "Bank Transfer"
+                      : "Card"}
                   </TableCell>
                   <TableCell>
                     {payment.status === 0 ? "Pending" : "Completed"}
