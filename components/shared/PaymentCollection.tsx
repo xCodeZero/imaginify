@@ -92,7 +92,7 @@ export const PaymentCollection = ({
                     />
                   </TableCell>
                   <TableCell>
-                    {payment.status === 0 ? "Pending" : "Processed"}
+                    {payment.status === 0 ? "Pending" : "Completed"}
                   </TableCell>
                   <TableCell>{getTimestamp(payment.createdAt)}</TableCell>
                 </TableRow>
