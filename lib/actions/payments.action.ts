@@ -5,10 +5,7 @@ import { handleError } from "../utils";
 import { connectToDatabase } from "../database/mongoose";
 import { getUserById, updateCredits } from "./user.actions";
 import Payment from "../database/models/payment.model";
-import { auth } from "@clerk/nextjs";
 import User from "../database/models/user.model";
-
-const { userId } = auth();
 
 const populateUser = (query: any) =>
   query.populate({
@@ -18,16 +15,13 @@ const populateUser = (query: any) =>
   });
 
 export async function createPayment(payment: CreatePaymentParams) {
-  if (!userId) redirect("/sign-in");
-  const user = await getUserById(userId);
-
   try {
     await connectToDatabase();
 
     // Create a new transaction with a buyerId
     const newPayment = await Payment.create({
       ...payment,
-      author: user._id,
+      author: payment.buyerId,
     });
 
     // await updateCredits(user._id, payment.credits);

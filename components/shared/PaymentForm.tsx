@@ -1,11 +1,12 @@
 "use client";
-
+// import { auth } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { v4 as randomId } from "uuid";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+// import { getUserById } from "@/lib/actions/user.actions";
 import {
   Form,
   FormControl,
@@ -29,6 +30,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { useToast } from "@/components/ui/use-toast";
+import { redirect } from "next/navigation";
 
 export const formSchema = z.object({
   refno: z.string().min(2, {
@@ -45,7 +47,7 @@ export const formSchema = z.object({
   credits: z.number(),
 });
 
-export function PaymentForm({
+function PaymentForm({
   action,
   data = null,
   buyerId,
@@ -54,6 +56,11 @@ export function PaymentForm({
 }: PaymentFormProps) {
   const [image, setImage] = useState(data);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // const { userId } = auth();
+
+  // if (!userId) redirect("/sign-in");
+
+  // const user = await getUserById(userId);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -88,7 +95,7 @@ export function PaymentForm({
       image: values.image,
       amount: values.amount,
       credits: values.credits,
-      buyerId: "",
+      buyerId: buyerId,
       createdAt: new Date(),
     };
 
@@ -215,3 +222,5 @@ export function PaymentForm({
     </Form>
   );
 }
+
+export default PaymentForm;

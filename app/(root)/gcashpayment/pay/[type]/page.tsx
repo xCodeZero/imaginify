@@ -1,5 +1,5 @@
 import Header from "@/components/shared/Header";
-import { PaymentForm } from "@/components/shared/PaymentForm";
+import PaymentForm from "@/components/shared/PaymentForm";
 import { paymentTypes } from "@/constants";
 import { getUserById } from "@/lib/actions/user.actions";
 import { auth } from "@clerk/nextjs";
