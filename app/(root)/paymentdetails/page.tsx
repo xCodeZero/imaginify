@@ -20,13 +20,13 @@ const PaymentDetails = async ({ searchParams }: SearchParamProps) => {
     <>
       <Header title="Payments" />
 
-      <section className="mt-8 md:mt-14">
+      {/* <section className="mt-8 md:mt-14">
         <PaymentCollection
           payments={payments?.data}
           totalPages={payments?.totalPages}
           page={page}
         />
-      </section>
+      </section> */}
     </>
   );
 };
