@@ -54,9 +54,10 @@ export async function createTransaction(transaction: CreateTransactionParams) {
       refno: transaction.stripeId,
       paymentId: transaction.stripeId,
       author: transaction.buyerId,
-      status: 0,
+      status: 1,
       plan: transaction.plan,
-      image: "asdfasdfasdfasdfasdfasdfasdsdaf",
+      image:
+        "https://utfs.io/f/f0c54707-5061-4f7b-94d3-aa625dae18a8-4su8gz.png",
       amount: transaction.amount,
       credits: transaction.credits,
     });
