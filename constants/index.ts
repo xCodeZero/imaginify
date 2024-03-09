@@ -42,7 +42,7 @@ export const navLinks = [
   {
     label: "My payments",
     route: "/paymentdetails",
-    icon: "/assets/icons/creditcard.jpg",
+    icon: "/assets/icons/atm-card.png",
   },
 ];
 
@@ -50,7 +50,7 @@ export const paymentLinks = [
   {
     label: "Buy Credits Using Credit Cards",
     route: "/credits",
-    icon: "/assets/icons/creditcard.jpg",
+    icon: "/assets/icons/atm-card.png",
   },
   {
     label: "Buy Credits Using Paypal",
