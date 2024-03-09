@@ -65,12 +65,6 @@ export const PaymentCollection = ({
       </div>
 
       {payments.length > 0 ? (
-        // <ul className="collection-list">
-        //   {payments.map((payment) => (
-        //     <Card image={payment} key={payment._id} />
-        //   ))}
-        // </ul>
-
         <Table className="mt-10">
           <TableCaption>A list of your recent invoices.</TableCaption>
           <TableHeader>
