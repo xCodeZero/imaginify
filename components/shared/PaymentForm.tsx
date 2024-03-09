@@ -90,6 +90,7 @@ function PaymentForm({
 
     const paymentData = {
       refno: values.refno,
+      paymentType: type,
       paymentId: randomId(),
       plan: values.plan,
       image: values.image,

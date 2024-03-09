@@ -3,6 +3,7 @@ import { Document, Schema, model, models } from "mongoose";
 export interface IPayment extends Document {
   _id: string;
   refno: string;
+  paymentType: string;
   paymentId: string;
   image: string;
   plan: string;
@@ -22,6 +23,10 @@ const PaymentSchema = new Schema({
     type: String,
     required: true,
     unique: true,
+  },
+  paymentType: {
+    type: String,
+    required: true,
   },
   paymentId: {
     type: String,

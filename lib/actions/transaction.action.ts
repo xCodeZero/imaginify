@@ -52,6 +52,7 @@ export async function createTransaction(transaction: CreateTransactionParams) {
     // Create a new transaction with a buyerId
     const newPayment = await Payment.create({
       refno: transaction.stripeId,
+      paymentType: "card",
       paymentId: transaction.stripeId,
       author: transaction.buyerId,
       status: 1,
