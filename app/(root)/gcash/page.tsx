@@ -1,24 +1,25 @@
-import { Collection } from "@/components/shared/Collection";
-import { adminNavLinks, navLinks } from "@/constants";
-import { getAllImages } from "@/lib/actions/image.actions";
-import { getUserById } from "@/lib/actions/user.actions";
-import { auth } from "@clerk/nextjs";
-import Image from "next/image";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { navLinks, adminNavLinks } from "@/constants";
 import Link from "next/link";
+import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import { getUserById } from "@/lib/actions/user.actions";
+import Image from "next/image";
 
-const Home = async ({ searchParams }: SearchParamProps) => {
-  const page = Number(searchParams?.page) || 1;
-  const searchQuery = (searchParams?.query as string) || "";
+const Gcash = async () => {
   const { userId } = auth();
-  const images = await getAllImages({ page, searchQuery });
-
   if (!userId) redirect("/sign-in");
-
   const user = await getUserById(userId);
-
   return (
-    <>
+    <div>
       <section className="home">
         <h1 className="home-heading">
           Unleash Your Creative Vision with AIditor
@@ -62,17 +63,27 @@ const Home = async ({ searchParams }: SearchParamProps) => {
           </ul>
         )}
       </section>
-
-      <section className="sm:mt-12">
-        <Collection
-          hasSearch={true}
-          images={images?.data}
-          totalPages={images?.totalPage}
-          page={page}
-        />
-      </section>
-    </>
+      <Table className="mt-10">
+        <TableCaption>A list of your recent invoices.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px]">Invoice</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Method</TableHead>
+            <TableHead className="text-right">Amount</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell className="font-medium">INV001</TableCell>
+            <TableCell>Paid</TableCell>
+            <TableCell>Credit Card</TableCell>
+            <TableCell className="text-right">$250.00</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </div>
   );
 };
 
-export default Home;
+export default Gcash;

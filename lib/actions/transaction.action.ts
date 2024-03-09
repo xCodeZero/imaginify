@@ -1,11 +1,12 @@
 "use server";
 
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 import Stripe from "stripe";
-import { handleError } from '../utils';
-import { connectToDatabase } from '../database/mongoose';
-import Transaction from '../database/models/transaction.model';
-import { updateCredits } from './user.actions';
+import { handleError } from "../utils";
+import { connectToDatabase } from "../database/mongoose";
+import Transaction from "../database/models/transaction.model";
+import { updateCredits } from "./user.actions";
+import Payment from "../database/models/payment.model";
 
 export async function checkoutCredits(transaction: CheckoutTransactionParams) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
@@ -16,26 +17,26 @@ export async function checkoutCredits(transaction: CheckoutTransactionParams) {
     line_items: [
       {
         price_data: {
-          currency: 'usd',
+          currency: "usd",
           unit_amount: amount,
           product_data: {
             name: transaction.plan,
-          }
+          },
         },
-        quantity: 1
-      }
+        quantity: 1,
+      },
     ],
     metadata: {
       plan: transaction.plan,
       credits: transaction.credits,
       buyerId: transaction.buyerId,
     },
-    mode: 'payment',
+    mode: "payment",
     success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/profile`,
     cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
-  })
+  });
 
-  redirect(session.url!)
+  redirect(session.url!);
 }
 
 export async function createTransaction(transaction: CreateTransactionParams) {
@@ -44,13 +45,26 @@ export async function createTransaction(transaction: CreateTransactionParams) {
 
     // Create a new transaction with a buyerId
     const newTransaction = await Transaction.create({
-      ...transaction, buyer: transaction.buyerId
-    })
+      ...transaction,
+      buyer: transaction.buyerId,
+    });
+
+    // Create a new transaction with a buyerId
+    const newPayment = await Payment.create({
+      refno: transaction.stripeId,
+      paymentId: transaction.stripeId,
+      author: transaction.buyerId,
+      status: 0,
+      plan: transaction.plan,
+      image: "",
+      amount: transaction.amount,
+      credits: transaction.credits,
+    });
 
     await updateCredits(transaction.buyerId, transaction.credits);
 
-    return JSON.parse(JSON.stringify(newTransaction));
+    return JSON.parse(JSON.stringify(newTransaction, newPayment));
   } catch (error) {
-    handleError(error)
+    handleError(error);
   }
 }

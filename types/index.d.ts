@@ -88,12 +88,25 @@ declare type CreateTransactionParams = {
   createdAt: Date;
 };
 
+declare type CreatePaymentParams = {
+  refno: string;
+  image: string;
+  paymentId: string;
+  credits: number;
+  plan: string;
+  amount: number;
+  buyerId: string;
+  createdAt: Date;
+};
+
 declare type TransformationTypeKey =
   | "restore"
   | "fill"
   | "remove"
   | "recolor"
   | "removeBackground";
+
+declare type PaymentTypeKey = "gcash" | "bank";
 
 // ====== URL QUERY PARAMS
 declare type FormUrlQueryParams = {
@@ -118,6 +131,11 @@ declare type SearchParamProps = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
+declare type SearchPaymentParamProps = {
+  params: { id: string; type: PaymentTypeKey };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
 declare type TransformationFormProps = {
   action: "Add" | "Update";
   userId: string;
@@ -135,4 +153,12 @@ declare type TransformedImageProps = {
   isTransforming: boolean;
   hasDownload?: boolean;
   setIsTransforming?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+declare type PaymentFormProps = {
+  action: "gcash" | "bank";
+  buyerId: string;
+  type: PaymentTypeKey;
+  creditBalance: number;
+  data?: IImage | null;
 };
