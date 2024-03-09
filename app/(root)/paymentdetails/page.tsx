@@ -1,18 +1,6 @@
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { navLinks, adminNavLinks } from "@/constants";
-import Link from "next/link";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { getUserById } from "@/lib/actions/user.actions";
-import Image from "next/image";
 import { getUserPayments } from "@/lib/actions/payments.action";
 import { PaymentCollection } from "@/components/shared/PaymentCollection";
 
