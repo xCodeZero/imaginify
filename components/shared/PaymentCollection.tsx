@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/pagination";
 import { transformationTypes } from "@/constants";
 import { IImage } from "@/lib/database/models/image.model";
-import { formUrlQuery, getJoinedDate, getTimestamp } from "@/lib/utils";
+import { formUrlQuery, getTimestamp } from "@/lib/utils";
 
 import { Button } from "../ui/button";
 
