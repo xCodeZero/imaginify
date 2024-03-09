@@ -213,3 +213,10 @@ export const getTimestamp = (createdAt: Date): string => {
     return `${years} ${years === 1 ? "year" : "years"} ago`;
   }
 };
+
+export const truncate = (input: string): string => {
+  if (input.length > 13) {
+    return input.substring(0, 14) + "...";
+  }
+  return input;
+};

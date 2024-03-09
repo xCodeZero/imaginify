@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/pagination";
 import { transformationTypes } from "@/constants";
 import { IImage } from "@/lib/database/models/image.model";
-import { formUrlQuery, getTimestamp } from "@/lib/utils";
+import { formUrlQuery, getTimestamp, truncate } from "@/lib/utils";
 
 import { Button } from "../ui/button";
 
@@ -79,7 +79,7 @@ export const PaymentCollection = ({
             {payments.map((payment) => (
               <>
                 <TableRow key={payment._id}>
-                  <TableCell>{payment.refno}</TableCell>
+                  <TableCell>{truncate(payment.refno)}</TableCell>
                   <TableCell>{payment.plan}</TableCell>
                   <TableCell>{payment.credits}</TableCell>
                   <TableCell>{payment.amount}</TableCell>
